@@ -194,7 +194,8 @@ export class DbfReader {
     if (m == null) {
       return null;
     }
-    return new Date(+m[1], +m[2], +m[3]);
+    // Month is 1-12, but Date constructor expects 0-11
+    return new Date(+m[1], +m[2] - 1, +m[3]);
   }
 
   private _readLogicalValue(field: DbfFieldDescr): boolean | null {
